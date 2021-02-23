@@ -1,4 +1,2 @@
-127.0.0.1 - - [23/Feb/2021:11:58:53 +0000] "GET /request HTTP/1.1" 200 970 "-" "lua-resty-http/0.14 (Lua) ngx_lua/10017"
-127.0.0.1 - - [23/Feb/2021:11:58:53 +0000] "GET /request HTTP/1.1" 200 970 "-" "lua-resty-http/0.14 (Lua) ngx_lua/10017"
-127.0.0.1 - - [23/Feb/2021:11:58:53 +0000] "GET /request HTTP/1.1" 200 970 "-" "lua-resty-http/0.14 (Lua) ngx_lua/10017"
-127.0.0.1 - - [23/Feb/2021:11:58:53 +0000] "GET /request HTTP/1.1" 200 970 "-" "lua-resty-http/0.14 (Lua) ngx_lua/10017"
+127.0.0.1 - - [23/Feb/2021:16:41:23 +0000] "GET /request HTTP/1.1" 200 74403 "-" "lua-resty-http/0.14 (Lua) ngx_lua/10017"
+127.0.0.1 - - [23/Feb/2021:16:41:23 +0000] "GET /request HTTP/1.1" 200 74403 "-" "lua-resty-http/0.14 (Lua) ngx_lua/10017"

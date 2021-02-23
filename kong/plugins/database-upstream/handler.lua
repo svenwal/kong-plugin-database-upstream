@@ -29,9 +29,7 @@ local plugin = {
 -- It runs in the 'init_worker_by_lua_block'
 function plugin:init_worker()
 
-  -- your custom code here
   kong.log.debug("saying hi from the 'init_worker' handler")
-
 end --]]
 
 
@@ -68,6 +66,41 @@ function plugin:access(plugin_conf)
   -- your custom code here
   kong.log.inspect(plugin_conf)   -- check the logs for a pretty-printed config!
   kong.service.request.set_header(plugin_conf.request_header, "this is on a request")
+                local mysql = require "resty.mysql"
+                local db, err = mysql:new()
+                if not db then
+                    kong.log.debug("failed to instantiate mysql: ", err)
+                    return
+                end
+                db:set_timeout(1000) -- 1 sec
+
+                local ok, err, errcode, sqlstate = db:connect{
+                    host = "mariadb",
+                    port = 3306,
+                    database = "world",
+                    user = "admin",
+                    password = "secretadmin",
+                    charset = "utf8",
+                    max_packet_size = 1024 * 1024,
+                }
+
+                if not ok then
+                    kong.log.warn("failed to connect: ", err, ": ", errcode, " ", sqlstate)
+                    return
+                end
+
+
+                res, err, errcode, sqlstate =
+                    db:query("select * from Country;", 10)
+                if not res then
+                    kong.log.debug("bad result: ", err, ": ", errcode, ": ", sqlstate, ".")
+                    return
+                end
+ 
+                local cjson = require "cjson"
+                kong.log.debug("result: ", cjson.encode(res))
+                kong.response.exit(200, cjson.encode(res))
+
 
 end --]]
 
